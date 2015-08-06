@@ -1,0 +1,68 @@
+﻿@{
+Layout = null;
+string buildConfiguration = System.Web.Configuration.WebConfigurationManager.AppSettings["buildConfiguration"];
+}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MySelfie Admin</title>
+    <link href="~/Content/css/bootstrap.css" rel="stylesheet">
+    <link href="~/Content/css/font-awesome.css" rel="stylesheet">
+    <link href="~/Content/css/smartadmin-production.css" rel="stylesheet">
+    <link href="~/Content/css/smartadmin-skins.css" rel="stylesheet">
+    <link href="~/Content/css/demo.css" rel="stylesheet">
+    <link href="~/Content/css/datepicker.css" rel="stylesheet">
+    <link href="~/Content/css/myselfie-style.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+    <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="http://cdn.kendostatic.com/2014.1.318/styles/kendo.flat.min.css" rel="stylesheet" />
+
+
+</head>
+<body class="">
+    <!-- POSSIBLE CLASSES: minified, fixed-ribbon, fixed-header, fixed-width
+     You can also add different skin classes such as "smart-skin-1", "smart-skin-2" etc...-->
+
+    <header id="header">
+        @Html.Partial("_LogoPartial")
+        <center><font size="+2" color="red">@buildConfiguration</font></center>
+        @Html.Partial("_HeaderRightPartial")        
+    </header>
+    <aside id="left-panel">
+        @Html.Partial("_LoginPartial")
+
+        @Html.Partial("_MenuPartial")
+    </aside>
+    <div id="main" role="main">
+        @Html.Partial("_RibbonPartial")
+
+        <div id="content">
+            @RenderBody()
+        </div>
+    </div>
+    @Html.Partial("_ShortcutPartial")
+
+    @Scripts.Render("~/bundles/jquery") 
+    @Scripts.Render("~/bundles/themejs")
+    <script src="~/Content/js/plugin/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/js/plugin/datatables/ColReorder.min.js"></script>
+    <script src="~/Content/js/plugin/datatables/FixedColumns.min.js"></script>
+    <script src="~/Content/js/plugin/datatables/ColVis.min.js"></script>
+    <script src="~/Content/js/plugin/datatables/ZeroClipboard.js"></script>
+    <script src="~/Content/js/plugin/datatables/media/js/TableTools.min.js"></script>
+    <script src="~/Content/js/plugin/datatables/DT_bootstrap.js"></script>    
+
+    <script type="text/javascript" src="~/Content/js/bootstrap/bootstrap-datepicker.js"></script>
+<!--[if IE 7]>
+
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+    <![endif]-->
+
+    @RenderSection("scripts", required: false)
+    <!-- Kendo UI combined JavaScript -->
+    <script src="http://cdn.kendostatic.com/2014.1.318/js/kendo.all.min.js"></script></body>
+</html>

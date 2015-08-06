@@ -1,0 +1,42 @@
+﻿
+@model IEnumerable<MySelfie.Models.EventCreateModel>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Start Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th>
+            Delete
+        </th>
+    </tr>
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(item.Name, "Create", new { id = item.EventId })
+                </td>
+                <td>
+                    @item.StartDate
+                </td>
+                <td>
+                    @item.EndDate
+                </td>
+                <td>
+                    @Html.ActionLink("X", "Delete", new { id = item.EventId })
+                </td>
+            </tr>
+        }
+    }
+
+</table>

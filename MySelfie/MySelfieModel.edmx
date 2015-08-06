@@ -1,0 +1,1110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MySelfieModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+          <Property Name="User_Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="Discriminator" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Credential">
+          <Key>
+            <PropertyRef Name="CredentialId" />
+          </Key>
+          <Property Name="CredentialId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="100" />
+          <Property Name="AppName" Type="varchar" MaxLength="100" />
+          <Property Name="ConsumerKey" Type="varchar" MaxLength="100" />
+          <Property Name="ConsumerSecret" Type="varchar" MaxLength="100" />
+          <Property Name="UserTokenKey" Type="varchar" MaxLength="100" />
+          <Property Name="UserTokenSecret" Type="varchar" MaxLength="100" />
+          <Property Name="UsageToday" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="EndDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Packet">
+          <Key>
+            <PropertyRef Name="PacketId" />
+          </Key>
+          <Property Name="PacketId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WallId" Type="int" Nullable="false" />
+          <Property Name="JSONBody" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" Nullable="false" />
+          <Property Name="DurationMillisecond" Type="int" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Filename" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="OriginalURL" Type="nvarchar(max)" />
+          <Property Name="SocialID" Type="bigint" Nullable="false" />
+          <Property Name="SocialCreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="EstimatedFinalizedDateTime" Type="datetime" />
+          <Property Name="PacketId" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HashTags" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Urls" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApprovedAt" Type="datetime" />
+          <Property Name="WallId" Type="int" />
+          <Property Name="HasPhoto" Type="bit" />
+          <Property Name="DisplayedAt" Type="datetime" />
+          <Property Name="Source" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="SocialIDstring" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PhotoTweet">
+          <Key>
+            <PropertyRef Name="PhotoTweetId" />
+          </Key>
+          <Property Name="PhotoTweetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Filename" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Text" Type="nvarchar(max)" />
+          <Property Name="OriginalURL" Type="nvarchar(max)" />
+          <Property Name="TweetID" Type="bigint" Nullable="false" />
+          <Property Name="TweetCreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="EstimatedFinalizedDateTime" Type="datetime" />
+          <Property Name="PacketId" Type="int" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HashTags" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Urls" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ApprovedAt" Type="datetime" />
+          <Property Name="WallId" Type="int" />
+          <Property Name="HasPhoto" Type="bit" />
+          <Property Name="DisplayedAt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="TwitterAccount">
+          <Key>
+            <PropertyRef Name="TwitterAccountId" />
+          </Key>
+          <Property Name="TwitterAccountId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TwitterUserName" Type="varchar" MaxLength="100" />
+          <Property Name="TwitterAppName" Type="varchar" MaxLength="100" />
+          <Property Name="ConsumerKey" Type="varchar" MaxLength="100" />
+          <Property Name="ConsumerSecret" Type="varchar" MaxLength="100" />
+          <Property Name="UserTokenKey" Type="varchar" MaxLength="100" />
+          <Property Name="UserTokenSecret" Type="varchar" MaxLength="100" />
+          <Property Name="TweetsCreatedToday" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Wall">
+          <Key>
+            <PropertyRef Name="WallId" />
+          </Key>
+          <Property Name="WallId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Hashtag" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CreatedAt" Type="datetime" Nullable="false" />
+          <Property Name="DescriptionText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhotoShownLengthMillisecond" Type="int" Nullable="false" />
+          <Property Name="AdShownLengthMillisecond" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhotoShownLengthSecond" Type="int" />
+          <Property Name="AdShownLengthSecond" Type="int" />
+          <Property Name="RetweetMessage" Type="varchar(max)" />
+          <Property Name="ConsumerKey" Type="varchar" MaxLength="100" />
+          <Property Name="ConsumerSecret" Type="varchar" MaxLength="100" />
+          <Property Name="UserTokenKey" Type="varchar" MaxLength="100" />
+          <Property Name="UserTokenSecret" Type="varchar" MaxLength="100" />
+          <Property Name="FrameTopColor" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="FrameBottomColor" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="LogoPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="Scrape_ConsumerKey" Type="varchar" MaxLength="100" />
+          <Property Name="Scrape_ConsumerSecret" Type="varchar" MaxLength="100" />
+          <Property Name="Scrape_UserTokenKey" Type="varchar" MaxLength="100" />
+          <Property Name="Scrape_UserTokenSecret" Type="varchar" MaxLength="100" />
+          <Property Name="Scrape_TwitterUserName" Type="varchar" MaxLength="100" />
+          <Property Name="TwitterUserName" Type="varchar" MaxLength="100" />
+          <Property Name="TwitterAppName" Type="varchar" MaxLength="100" />
+          <Property Name="Scrape_TwitterAppName" Type="varchar" MaxLength="100" />
+          <Property Name="LogoImage" Type="varbinary(max)" />
+          <Property Name="LogoImageType" Type="nvarchar" MaxLength="30" />
+          <Property Name="RightText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CaptionText" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Scrape_InstagramUserName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Scrape_InstagramPassword" Type="nvarchar" MaxLength="255" />
+          <Property Name="Scrape_InstagramClientID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Scrape_InstagramClientSecret" Type="nvarchar" MaxLength="255" />
+          <Property Name="Scrape_InstagramToken" Type="nvarchar" MaxLength="255" />
+          <Property Name="Post_InstagramUserName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Post_InstagramPassword" Type="nvarchar" MaxLength="255" />
+          <Property Name="Post_InstagramClientID" Type="nvarchar" MaxLength="255" />
+          <Property Name="Post_InstagramClientSecret" Type="nvarchar" MaxLength="255" />
+          <Property Name="PostingAccount_InstagramUserName" Type="nvarchar" MaxLength="255" />
+          <Property Name="PostingAccount_InstagramPassword" Type="nvarchar" MaxLength="255" />
+          <Property Name="PostingAccount_InstagramToken" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="WebLog">
+          <Key>
+            <PropertyRef Name="WebLogId" />
+          </Key>
+          <Property Name="WebLogId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Context" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="WorkerCommand">
+          <Key>
+            <PropertyRef Name="WorkerCommandId" />
+          </Key>
+          <Property Name="WorkerCommandId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="WallId" Type="int" Nullable="false" />
+          <Property Name="Command" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkerStatus">
+          <Key>
+            <PropertyRef Name="WorkerStatusID" />
+          </Key>
+          <Property Name="WorkerStatusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Message" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="TimeStamp" Type="datetime" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Context" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Header" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Status" Type="nchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Packet_Wall">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1" />
+          <End Role="Packet" Type="Self.Packet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="WallId" />
+            </Principal>
+            <Dependent Role="Packet">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_Packet">
+          <End Role="Packet" Type="Self.Packet" Multiplicity="0..1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packet">
+              <PropertyRef Name="PacketId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PacketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_WallId">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="0..1" />
+          <End Role="Photo" Type="Self.Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="WallId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoTweet_Packet">
+          <End Role="Packet" Type="Self.Packet" Multiplicity="0..1" />
+          <End Role="PhotoTweet" Type="Self.PhotoTweet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packet">
+              <PropertyRef Name="PacketId" />
+            </Principal>
+            <Dependent Role="PhotoTweet">
+              <PropertyRef Name="PacketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoTweet_WallId">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="0..1" />
+          <End Role="PhotoTweet" Type="Self.PhotoTweet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="WallId" />
+            </Principal>
+            <Dependent Role="PhotoTweet">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerCommand_CreatedBy">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="WorkerCommand" Type="Self.WorkerCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkerCommand">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerCommand_WallId">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1" />
+          <End Role="WorkerCommand" Type="Self.WorkerCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="WallId" />
+            </Principal>
+            <Dependent Role="WorkerCommand">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="MySelfieModelStoreContainer">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Credential" EntityType="Self.Credential" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Event" EntityType="Self.Event" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Packet" EntityType="Self.Packet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Photo" EntityType="Self.Photo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PhotoTweet" EntityType="Self.PhotoTweet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TwitterAccount" EntityType="Self.TwitterAccount" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Wall" EntityType="Self.Wall" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WebLog" EntityType="Self.WebLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkerCommand" EntityType="Self.WorkerCommand" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkerStatus" EntityType="Self.WorkerStatus" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Packet_Wall" Association="Self.FK_Packet_Wall">
+            <End Role="Wall" EntitySet="Wall" />
+            <End Role="Packet" EntitySet="Packet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_Packet" Association="Self.FK_Photo_Packet">
+            <End Role="Packet" EntitySet="Packet" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_WallId" Association="Self.FK_Photo_WallId">
+            <End Role="Wall" EntitySet="Wall" />
+            <End Role="Photo" EntitySet="Photo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoTweet_Packet" Association="Self.FK_PhotoTweet_Packet">
+            <End Role="Packet" EntitySet="Packet" />
+            <End Role="PhotoTweet" EntitySet="PhotoTweet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoTweet_WallId" Association="Self.FK_PhotoTweet_WallId">
+            <End Role="Wall" EntitySet="Wall" />
+            <End Role="PhotoTweet" EntitySet="PhotoTweet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerCommand_CreatedBy" Association="Self.FK_WorkerCommand_CreatedBy">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="WorkerCommand" EntitySet="WorkerCommand" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerCommand_WallId" Association="Self.FK_WorkerCommand_WallId">
+            <End Role="Wall" EntitySet="Wall" />
+            <End Role="WorkerCommand" EntitySet="WorkerCommand" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MySelfieModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="User_Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Discriminator" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+          <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <NavigationProperty Name="WorkerCommands" Relationship="MySelfieModel.FK_WorkerCommand_CreatedBy" FromRole="AspNetUser" ToRole="WorkerCommand" />
+        </EntityType>
+        <EntityType Name="Packet">
+          <Key>
+            <PropertyRef Name="PacketId" />
+          </Key>
+          <Property Name="PacketId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WallId" Type="Int32" Nullable="false" />
+          <Property Name="JSONBody" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DurationMillisecond" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Wall" Relationship="Self.FK_Packet_Wall" FromRole="Packet" ToRole="Wall" />
+          <NavigationProperty Name="PhotoTweets" Relationship="Self.FK_PhotoTweet_Packet" FromRole="Packet" ToRole="PhotoTweet" />
+          <NavigationProperty Name="Photos" Relationship="MySelfieModel.FK_Photo_Packet" FromRole="Packet" ToRole="Photo" />
+        </EntityType>
+        <EntityType Name="PhotoTweet">
+          <Key>
+            <PropertyRef Name="PhotoTweetId" />
+          </Key>
+          <Property Name="PhotoTweetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Filename" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TweetID" Type="Int64" Nullable="false" />
+          <Property Name="TweetCreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="EstimatedFinalizedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="PacketId" Type="Int32" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HashTags" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Urls" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Packet" Relationship="Self.FK_PhotoTweet_Packet" FromRole="PhotoTweet" ToRole="Packet" />
+          <Property Name="ApprovedAt" Type="DateTime" Precision="3" />
+          <Property Name="WallId" Type="Int32" />
+          <NavigationProperty Name="Wall" Relationship="MySelfieModel.FK_PhotoTweet_WallId" FromRole="PhotoTweet" ToRole="Wall" />
+          <Property Name="HasPhoto" Type="Boolean" />
+          <Property Name="DisplayedAt" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Wall">
+          <Key>
+            <PropertyRef Name="WallId" />
+          </Key>
+          <Property Name="WallId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Hashtag" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DescriptionText" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhotoShownLengthMillisecond" Type="Int32" Nullable="false" />
+          <Property Name="AdShownLengthMillisecond" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Packets" Relationship="Self.FK_Packet_Wall" FromRole="Wall" ToRole="Packet" />
+          <Property Name="PhotoShownLengthSecond" Type="Int32" />
+          <Property Name="AdShownLengthSecond" Type="Int32" />
+          <Property Name="RetweetMessage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserTokenKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserTokenSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PhotoTweets" Relationship="MySelfieModel.FK_PhotoTweet_WallId" FromRole="Wall" ToRole="PhotoTweet" />
+          <NavigationProperty Name="WorkerCommands" Relationship="MySelfieModel.FK_WorkerCommand_WallId" FromRole="Wall" ToRole="WorkerCommand" />
+          <Property Name="FrameTopColor" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="FrameBottomColor" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="LogoPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Scrape_ConsumerKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Scrape_ConsumerSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Scrape_UserTokenKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Scrape_UserTokenSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Scrape_TwitterUserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TwitterUserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TwitterAppName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Scrape_TwitterAppName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LogoImage" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="LogoImageType" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="RightText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CaptionText" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Scrape_InstagramUserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Scrape_InstagramPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Scrape_InstagramClientID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Scrape_InstagramClientSecret" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Scrape_InstagramToken" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Post_InstagramUserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Post_InstagramPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Post_InstagramClientID" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Post_InstagramClientSecret" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PostingAccount_InstagramUserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PostingAccount_InstagramPassword" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PostingAccount_InstagramToken" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Photos" Relationship="MySelfieModel.FK_Photo_WallId" FromRole="Wall" ToRole="Photo" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="User_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Packet_Wall">
+          <End Role="Wall" Type="Self.Wall" Multiplicity="1" />
+          <End Role="Packet" Type="Self.Packet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="WallId" />
+            </Principal>
+            <Dependent Role="Packet">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PhotoTweet_Packet">
+          <End Role="Packet" Type="Self.Packet" Multiplicity="0..1" />
+          <End Role="PhotoTweet" Type="Self.PhotoTweet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packet">
+              <PropertyRef Name="PacketId" />
+            </Principal>
+            <Dependent Role="PhotoTweet">
+              <PropertyRef Name="PacketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="MySelfieEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Packets" EntityType="Self.Packet" />
+          <EntitySet Name="PhotoTweets" EntityType="Self.PhotoTweet" />
+          <EntitySet Name="Walls" EntityType="Self.Wall" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Packet_Wall" Association="Self.FK_Packet_Wall">
+            <End Role="Wall" EntitySet="Walls" />
+            <End Role="Packet" EntitySet="Packets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoTweet_Packet" Association="Self.FK_PhotoTweet_Packet">
+            <End Role="Packet" EntitySet="Packets" />
+            <End Role="PhotoTweet" EntitySet="PhotoTweets" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PhotoTweet_WallId" Association="MySelfieModel.FK_PhotoTweet_WallId">
+            <End Role="Wall" EntitySet="Walls" />
+            <End Role="PhotoTweet" EntitySet="PhotoTweets" />
+          </AssociationSet>
+          <EntitySet Name="WorkerCommands" EntityType="MySelfieModel.WorkerCommand" />
+          <AssociationSet Name="FK_WorkerCommand_WallId" Association="MySelfieModel.FK_WorkerCommand_WallId">
+            <End Role="Wall" EntitySet="Walls" />
+            <End Role="WorkerCommand" EntitySet="WorkerCommands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkerCommand_CreatedBy" Association="MySelfieModel.FK_WorkerCommand_CreatedBy">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="WorkerCommand" EntitySet="WorkerCommands" />
+          </AssociationSet>
+          <EntitySet Name="WorkerStatus" EntityType="MySelfieModel.WorkerStatus" />
+          <EntitySet Name="Events" EntityType="MySelfieModel.Event" />
+          <EntitySet Name="TwitterAccounts" EntityType="MySelfieModel.TwitterAccount" />
+          <EntitySet Name="Credentials" EntityType="MySelfieModel.Credential" />
+          <EntitySet Name="Photos" EntityType="MySelfieModel.Photo" />
+          <AssociationSet Name="FK_Photo_Packet" Association="MySelfieModel.FK_Photo_Packet">
+            <End Role="Packet" EntitySet="Packets" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Photo_WallId" Association="MySelfieModel.FK_Photo_WallId">
+            <End Role="Wall" EntitySet="Walls" />
+            <End Role="Photo" EntitySet="Photos" />
+          </AssociationSet>
+          <EntitySet Name="WebLogs" EntityType="MySelfieModel.WebLog" />
+          </EntityContainer>
+        <Association Name="FK_PhotoTweet_WallId">
+          <End Type="MySelfieModel.Wall" Role="Wall" Multiplicity="0..1" />
+          <End Type="MySelfieModel.PhotoTweet" Role="PhotoTweet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="WallId" />
+            </Principal>
+            <Dependent Role="PhotoTweet">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WorkerCommand">
+          <Key>
+            <PropertyRef Name="WorkerCommandId" />
+          </Key>
+          <Property Name="WorkerCommandId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="WallId" Type="Int32" Nullable="false" />
+          <Property Name="Command" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Wall" Relationship="MySelfieModel.FK_WorkerCommand_WallId" FromRole="WorkerCommand" ToRole="Wall" />
+          <NavigationProperty Name="AspNetUser" Relationship="MySelfieModel.FK_WorkerCommand_CreatedBy" FromRole="WorkerCommand" ToRole="AspNetUser" />
+        </EntityType>
+        <Association Name="FK_WorkerCommand_WallId">
+          <End Type="MySelfieModel.Wall" Role="Wall" Multiplicity="1" />
+          <End Type="MySelfieModel.WorkerCommand" Role="WorkerCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="WallId" />
+            </Principal>
+            <Dependent Role="WorkerCommand">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkerCommand_CreatedBy">
+          <End Type="MySelfieModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="MySelfieModel.WorkerCommand" Role="WorkerCommand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="WorkerCommand">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WorkerStatus">
+          <Key>
+            <PropertyRef Name="WorkerStatusID" />
+          </Key>
+          <Property Name="WorkerStatusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Context" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Header" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="TwitterAccount">
+          <Key>
+            <PropertyRef Name="TwitterAccountId" />
+          </Key>
+          <Property Name="TwitterAccountId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TwitterUserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TwitterAppName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserTokenKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserTokenSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="TweetsCreatedToday" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Credential">
+          <Key>
+            <PropertyRef Name="CredentialId" />
+          </Key>
+          <Property Name="CredentialId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AppName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ConsumerSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserTokenKey" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UserTokenSecret" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="UsageToday" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Photo">
+          <Key>
+            <PropertyRef Name="PhotoId" />
+          </Key>
+          <Property Name="PhotoId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Filename" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SocialID" Type="Int64" Nullable="false" />
+          <Property Name="SocialCreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedAt" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="EstimatedFinalizedDateTime" Type="DateTime" Precision="3" />
+          <Property Name="PacketId" Type="Int32" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HashTags" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Urls" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ApprovedAt" Type="DateTime" Precision="3" />
+          <Property Name="WallId" Type="Int32" />
+          <Property Name="HasPhoto" Type="Boolean" />
+          <Property Name="DisplayedAt" Type="DateTime" Precision="3" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SocialIDstring" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Packet" Relationship="MySelfieModel.FK_Photo_Packet" FromRole="Photo" ToRole="Packet" />
+          <NavigationProperty Name="Wall" Relationship="MySelfieModel.FK_Photo_WallId" FromRole="Photo" ToRole="Wall" />
+        </EntityType>
+        <Association Name="FK_Photo_Packet">
+          <End Type="MySelfieModel.Packet" Role="Packet" Multiplicity="0..1" />
+          <End Type="MySelfieModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Packet">
+              <PropertyRef Name="PacketId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="PacketId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Photo_WallId">
+          <End Type="MySelfieModel.Wall" Role="Wall" Multiplicity="0..1" />
+          <End Type="MySelfieModel.Photo" Role="Photo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wall">
+              <PropertyRef Name="WallId" />
+            </Principal>
+            <Dependent Role="Photo">
+              <PropertyRef Name="WallId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WebLog">
+          <Key>
+            <PropertyRef Name="WebLogId" />
+          </Key>
+          <Property Name="WebLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Context" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TimeStamp" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MySelfieModelStoreContainer" CdmEntityContainer="MySelfieEntities">
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="MySelfieModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="MySelfieModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="MySelfieModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="MySelfieModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="Discriminator" ColumnName="Discriminator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packets">
+            <EntityTypeMapping TypeName="MySelfieModel.Packet">
+              <MappingFragment StoreEntitySet="Packet">
+                <ScalarProperty Name="PacketId" ColumnName="PacketId" />
+                <ScalarProperty Name="WallId" ColumnName="WallId" />
+                <ScalarProperty Name="JSONBody" ColumnName="JSONBody" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="DurationMillisecond" ColumnName="DurationMillisecond" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PhotoTweets">
+            <EntityTypeMapping TypeName="MySelfieModel.PhotoTweet">
+              <MappingFragment StoreEntitySet="PhotoTweet">
+                <ScalarProperty Name="DisplayedAt" ColumnName="DisplayedAt" />
+                <ScalarProperty Name="HasPhoto" ColumnName="HasPhoto" />
+                <ScalarProperty Name="WallId" ColumnName="WallId" />
+                <ScalarProperty Name="ApprovedAt" ColumnName="ApprovedAt" />
+                <ScalarProperty Name="PhotoTweetId" ColumnName="PhotoTweetId" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="OriginalURL" ColumnName="OriginalURL" />
+                <ScalarProperty Name="TweetID" ColumnName="TweetID" />
+                <ScalarProperty Name="TweetCreatedAt" ColumnName="TweetCreatedAt" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="EstimatedFinalizedDateTime" ColumnName="EstimatedFinalizedDateTime" />
+                <ScalarProperty Name="PacketId" ColumnName="PacketId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="HashTags" ColumnName="HashTags" />
+                <ScalarProperty Name="Urls" ColumnName="Urls" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Walls">
+            <EntityTypeMapping TypeName="MySelfieModel.Wall">
+              <MappingFragment StoreEntitySet="Wall">
+                <ScalarProperty Name="PostingAccount_InstagramToken" ColumnName="PostingAccount_InstagramToken" />
+                <ScalarProperty Name="PostingAccount_InstagramPassword" ColumnName="PostingAccount_InstagramPassword" />
+                <ScalarProperty Name="PostingAccount_InstagramUserName" ColumnName="PostingAccount_InstagramUserName" />
+                <ScalarProperty Name="Post_InstagramClientSecret" ColumnName="Post_InstagramClientSecret" />
+                <ScalarProperty Name="Post_InstagramClientID" ColumnName="Post_InstagramClientID" />
+                <ScalarProperty Name="Post_InstagramPassword" ColumnName="Post_InstagramPassword" />
+                <ScalarProperty Name="Post_InstagramUserName" ColumnName="Post_InstagramUserName" />
+                <ScalarProperty Name="Scrape_InstagramToken" ColumnName="Scrape_InstagramToken" />
+                <ScalarProperty Name="Scrape_InstagramClientSecret" ColumnName="Scrape_InstagramClientSecret" />
+                <ScalarProperty Name="Scrape_InstagramClientID" ColumnName="Scrape_InstagramClientID" />
+                <ScalarProperty Name="Scrape_InstagramPassword" ColumnName="Scrape_InstagramPassword" />
+                <ScalarProperty Name="Scrape_InstagramUserName" ColumnName="Scrape_InstagramUserName" />
+                <ScalarProperty Name="CaptionText" ColumnName="CaptionText" />
+                <ScalarProperty Name="RightText" ColumnName="RightText" />
+                <ScalarProperty Name="LogoImageType" ColumnName="LogoImageType" />
+                <ScalarProperty Name="LogoImage" ColumnName="LogoImage" />
+                <ScalarProperty Name="Scrape_TwitterAppName" ColumnName="Scrape_TwitterAppName" />
+                <ScalarProperty Name="TwitterAppName" ColumnName="TwitterAppName" />
+                <ScalarProperty Name="TwitterUserName" ColumnName="TwitterUserName" />
+                <ScalarProperty Name="Scrape_TwitterUserName" ColumnName="Scrape_TwitterUserName" />
+                <ScalarProperty Name="Scrape_UserTokenSecret" ColumnName="Scrape_UserTokenSecret" />
+                <ScalarProperty Name="Scrape_UserTokenKey" ColumnName="Scrape_UserTokenKey" />
+                <ScalarProperty Name="Scrape_ConsumerSecret" ColumnName="Scrape_ConsumerSecret" />
+                <ScalarProperty Name="Scrape_ConsumerKey" ColumnName="Scrape_ConsumerKey" />
+                <ScalarProperty Name="LogoPath" ColumnName="LogoPath" />
+                <ScalarProperty Name="FrameBottomColor" ColumnName="FrameBottomColor" />
+                <ScalarProperty Name="FrameTopColor" ColumnName="FrameTopColor" />
+                <ScalarProperty Name="UserTokenSecret" ColumnName="UserTokenSecret" />
+                <ScalarProperty Name="UserTokenKey" ColumnName="UserTokenKey" />
+                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
+                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
+                <ScalarProperty Name="RetweetMessage" ColumnName="RetweetMessage" />
+                <ScalarProperty Name="AdShownLengthSecond" ColumnName="AdShownLengthSecond" />
+                <ScalarProperty Name="PhotoShownLengthSecond" ColumnName="PhotoShownLengthSecond" />
+                <ScalarProperty Name="WallId" ColumnName="WallId" />
+                <ScalarProperty Name="Hashtag" ColumnName="Hashtag" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="DescriptionText" ColumnName="DescriptionText" />
+                <ScalarProperty Name="PhotoShownLengthMillisecond" ColumnName="PhotoShownLengthMillisecond" />
+                <ScalarProperty Name="AdShownLengthMillisecond" ColumnName="AdShownLengthMillisecond" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="MySelfieModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetRoles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="AspNetUsers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="WorkerCommands">
+            <EntityTypeMapping TypeName="MySelfieModel.WorkerCommand">
+              <MappingFragment StoreEntitySet="WorkerCommand">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Command" ColumnName="Command" />
+                <ScalarProperty Name="WallId" ColumnName="WallId" />
+                <ScalarProperty Name="WorkerCommandId" ColumnName="WorkerCommandId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkerStatus">
+            <EntityTypeMapping TypeName="MySelfieModel.WorkerStatus">
+              <MappingFragment StoreEntitySet="WorkerStatus">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Header" ColumnName="Header" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Context" ColumnName="Context" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="WorkerStatusID" ColumnName="WorkerStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="MySelfieModel.Event">
+              <MappingFragment StoreEntitySet="Event">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TwitterAccounts">
+            <EntityTypeMapping TypeName="MySelfieModel.TwitterAccount">
+              <MappingFragment StoreEntitySet="TwitterAccount">
+                <ScalarProperty Name="TweetsCreatedToday" ColumnName="TweetsCreatedToday" />
+                <ScalarProperty Name="UserTokenSecret" ColumnName="UserTokenSecret" />
+                <ScalarProperty Name="UserTokenKey" ColumnName="UserTokenKey" />
+                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
+                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
+                <ScalarProperty Name="TwitterAppName" ColumnName="TwitterAppName" />
+                <ScalarProperty Name="TwitterUserName" ColumnName="TwitterUserName" />
+                <ScalarProperty Name="TwitterAccountId" ColumnName="TwitterAccountId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Credentials">
+            <EntityTypeMapping TypeName="MySelfieModel.Credential">
+              <MappingFragment StoreEntitySet="Credential">
+                <ScalarProperty Name="UsageToday" ColumnName="UsageToday" />
+                <ScalarProperty Name="UserTokenSecret" ColumnName="UserTokenSecret" />
+                <ScalarProperty Name="UserTokenKey" ColumnName="UserTokenKey" />
+                <ScalarProperty Name="ConsumerSecret" ColumnName="ConsumerSecret" />
+                <ScalarProperty Name="ConsumerKey" ColumnName="ConsumerKey" />
+                <ScalarProperty Name="AppName" ColumnName="AppName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="CredentialId" ColumnName="CredentialId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Photos">
+            <EntityTypeMapping TypeName="MySelfieModel.Photo">
+              <MappingFragment StoreEntitySet="Photo">
+                <ScalarProperty Name="SocialIDstring" ColumnName="SocialIDstring" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="DisplayedAt" ColumnName="DisplayedAt" />
+                <ScalarProperty Name="HasPhoto" ColumnName="HasPhoto" />
+                <ScalarProperty Name="WallId" ColumnName="WallId" />
+                <ScalarProperty Name="ApprovedAt" ColumnName="ApprovedAt" />
+                <ScalarProperty Name="Urls" ColumnName="Urls" />
+                <ScalarProperty Name="HashTags" ColumnName="HashTags" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="PacketId" ColumnName="PacketId" />
+                <ScalarProperty Name="EstimatedFinalizedDateTime" ColumnName="EstimatedFinalizedDateTime" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="SocialCreatedAt" ColumnName="SocialCreatedAt" />
+                <ScalarProperty Name="SocialID" ColumnName="SocialID" />
+                <ScalarProperty Name="OriginalURL" ColumnName="OriginalURL" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Filename" ColumnName="Filename" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="PhotoId" ColumnName="PhotoId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WebLogs">
+            <EntityTypeMapping TypeName="MySelfieModel.WebLog">
+              <MappingFragment StoreEntitySet="WebLog">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Context" ColumnName="Context" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="WebLogId" ColumnName="WebLogId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

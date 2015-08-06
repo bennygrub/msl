@@ -1,0 +1,81 @@
+﻿@model IEnumerable<MySelfie.Models.PhotoPacketModel>
+@{    
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MySelfie Viewer">
+    <meta name="author" content="Miles Gray and Jason Newell">
+    <link rel="shortcut icon" href="assets/ico/favicon.ico">
+
+    <title>MySelfie Viewer</title>
+
+    <link href="http://fonts.googleapis.com/css?family=Roboto:700" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css">
+    <link href="/assets/fonts/ProximaNova-Regular.otf" rel="stylesheet" type="text/css">
+
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/css/animate.css" rel="stylesheet">
+    <link href="~/assets/css/slideshow.css" rel="stylesheet">
+
+    <script src="~/assets/js/jquery-1.11.1.js"></script>
+    <script src="~/assets/js/jquery-ui-1.10.4.custom.js"></script>
+    <script src="~/assets/js/jquery.transit.js"></script>
+    <script src="~/assets/js/myselfie.slideshow.js"></script>
+
+    <script>
+    var packetArray = [];
+    @if (Model != null)
+    {
+        foreach(var item in Model)
+        {
+            @Html.Raw("packetArray.push({Data:" + MvcHtmlString.Create(item.Data) + ", PacketId:" + item.PacketId +", Status:'" + item.Status + "'});")
+        }
+    }
+
+    (function ($) {
+        $(window).on('load', function load() {
+            // See myselfie.slideshow.js 'options' section for full list of configurable attributes
+            // See animate.css website for some animation options (along with this page's custom slideshow.css).
+            $('div#slideshow')
+                .slideshow({
+                    interval: @(ViewBag.Interval),
+                    transitionDuration: 1000,
+                    gridShowDuration: 1000, //@(ViewBag.GridShowDuration),                    
+                    gridStagger: @(ViewBag.GridStagger),
+                    finalInterval: @(ViewBag.FinalInterval),
+                    animationDuration: @(ViewBag.AnimationDuration),
+                    title: '@(Html.Raw(ViewBag.Title))',
+                    caption: '@(Html.Raw(ViewBag.Caption))',
+                    left: '@(Html.Raw(ViewBag.Left))',
+                    right: '@(Html.Raw(ViewBag.Right))',
+                    topColor: '@(ViewBag.TopColor)',
+                    bottomColor: '@(ViewBag.BottomColor)',
+                    wallID: @(ViewBag.WallId),
+                    packets: packetArray
+                });
+        });
+    })(jQuery);
+    // Dev shortcut
+    $(window).keydown(function (e) { if (e.keyCode == 123) debugger; });
+</script>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div id="slideshow">
+        <div id="imagePackets">
+        </div>
+    </div>           
+</body>
+</html>
+

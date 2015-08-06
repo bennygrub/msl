@@ -1,0 +1,31 @@
+﻿@model IEnumerable<MySelfie.Models.UserCreateModel>
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Role
+        </th>
+        <th>
+            Delete
+        </th>
+    </tr>
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink(@item.Name, "Create", new { id = item.Id })
+                </td>
+                <td>
+                    @item.Role
+                </td>
+                <td>
+                    @Html.ActionLink("X", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    }
+</table>

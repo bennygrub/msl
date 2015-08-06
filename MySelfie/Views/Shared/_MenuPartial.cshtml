@@ -1,0 +1,40 @@
+﻿<!-- NAVIGATION : This navigation is also responsive
+
+To make this navigation dynamic please make sure to link the node
+(the reference to the nav > ul) after page load. Or the navigation
+will not initialize.
+-->
+<nav>
+    <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+    Please note that these links work a bit different than
+    traditional href="" links. See documentation for details.
+    -->
+
+    <ul>
+        <li class="">
+            @Html.Raw(@Html.ActionLink("[replace]", "Index", "Wall", null, new { title = "Dashboard" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-home\"></i> <span class=\"menu-item-parent\">Dashboard</span>"))            
+        </li>
+        <li>
+            @Html.Raw(@Html.ActionLink("[replace]", "Create", "Wall", null, new { title = "New Wall" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-plus-circle\"></i> <span class=\"menu-item-parent\">New Wall</span>"))
+        </li>
+        @*<li>
+        @Html.Raw(@Html.ActionLink("[replace]", "Index", "Credential", null, new { title = "Credentials" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-group\"></i> <span class=\"menu-item-parent\">Credentials</span>"))
+    </li>
+    <li>
+        @Html.Raw(@Html.ActionLink("[replace]", "Index", "Log", null, new { title = "System Log" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-cogs\"></i> <span class=\"menu-item-parent\">System Log</span>"))
+    </li>*@
+@*        <li>
+        @Html.Raw(@Html.ActionLink("[replace]", "Approval", "Photo", null, new { title = "Photo Approval" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-magic\"></i> <span class=\"menu-item-parent\">Photo Approval</span>"))
+    </li>
+    <li>
+        @Html.Raw(@Html.ActionLink("[replace]", "Viewer", "Photo", null, new { title = "Wall Viewer", target = "_blank" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-th\"></i> <span class=\"menu-item-parent\">Wall Viewer</span>"))
+    </li>
+    <li>
+        @Html.Raw(@Html.ActionLink("[replace]", "Index", "User", null, new { title = "Users" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-user\"></i> <span class=\"menu-item-parent\">Users</span>"))
+    </li>
+    <li>
+        @Html.Raw(@Html.ActionLink("[replace]", "Index", "Event", null, new { title = "Events" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-book\"></i> <span class=\"menu-item-parent\">Events</span>"))
+    </li>*@
+    </ul>
+</nav>
+<span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>

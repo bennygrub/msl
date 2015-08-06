@@ -1,0 +1,39 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated)
+{
+    @*using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+    @Html.AntiForgeryToken()
+
+    <ul class="nav navbar-nav navbar-right">
+        <li>
+            @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
+        </li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+    </ul>
+    
+    }*@
+    
+    <div class="login-info">
+		<span> <!-- User image size is adjusted inside CSS, it should stay as it --> 
+					
+			<a href="~/Account/Manage" id="show-shortcut">
+				<img src="~/img/avatars/sunny.png" alt="me" class="online" /> 
+				<span>
+                    @(User.Identity.GetUserName().ToString())
+				</span>
+				@*<i class="fa fa-angle-down"></i>*@
+			</a> 
+					
+		</span>
+	</div>
+}
+else
+{
+    @*
+    <!-- should never get here, should redirect to login page if not logged in -->
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>*@
+}

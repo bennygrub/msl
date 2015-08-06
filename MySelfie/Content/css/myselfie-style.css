@@ -1,0 +1,102 @@
+
+@media only screen and (max-width: 679px) and (min-width: 0) {
+    #logout {
+        background-color: #f3f3f3;
+        padding: 0px;
+        font-size: 17px;
+    }
+}
+@media only screen and (min-width: 680px) {
+    #logout {
+        background-color: #f3f3f3;
+        padding: 6px;
+        font-size: 20px;
+    }
+}
+
+.wall-table {
+
+}
+
+.center {
+    text-align: center;
+}
+
+.btn-icon {
+
+}
+    .btn-icon i {
+        padding-right:10px;
+    }
+
+.remove-wall-btn {
+    color: #d93b39;
+}
+
+.text-color-white {
+    color: #fff !important;
+}
+
+
+    /**
+    Styles for system log
+    */
+.log-header {
+
+}
+    .log-header h2 {
+        font-size: 20px !important;
+        font-weight: bold !important;
+        text-transform: uppercase;
+        text-rendering: optimizeLegibility !important;
+
+    }
+        .log-header h2 strong {
+
+        }
+        .log-header h2 i {
+            margin-left: 3px;
+            text-transform: lowercase !important;
+            position: relative;
+            top: -10px;
+        }
+
+.log-body {
+
+}
+    .log-body h3 {
+        border-bottom: 2px solid #444;
+        margin-left: -10px;
+        padding-left: 24px;
+        font-size: 25px;
+        font-weight: bold;
+        font-family: monospace;
+        text-transform: uppercase;
+        margin-bottom: 1px;
+        margin-top: 5px;
+    }
+
+.log-header-default {
+    
+}
+.log-header-error {
+    border-color: #953b39 !important;
+    color: #fff !important;
+    background: #c26565 !important;
+    text-shadow: none !important;
+}
+.log-header-warning {
+    border-color: #dfb56c !important;
+    color: #826430 !important;
+    background: #efe1b3 !important;
+}
+.log-header-info {
+    border-color: #9cb4c5 !important;
+    color: #305d8c !important;
+    background: #d6dde7 !important;
+}
+.log-header-update {
+    border-color: #8ac38b !important;
+    color: #356635 !important;
+    background: #cde0c4 !important;
+}

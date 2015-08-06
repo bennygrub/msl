@@ -1,0 +1,98 @@
+﻿@model MySelfie.Models.LoginViewModel
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+<div class="row">
+    @Html.Partial("_LeftContentPartial")
+    <div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+        <div class="well no-padding">
+            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "smart-form client-form", role = "form", id="login-form" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+                <header>
+                    Sign In
+                </header>
+
+                <fieldset>
+
+                    <section>
+                        <label class="label">UserName</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-user"></i>
+                            @Html.TextBoxFor(m => m.UserName)
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter email address/username</b>
+                        </label>
+                    </section>
+
+                    <section>
+                        <label class="label">Password</label>
+                        <label class="input">
+                            <i class="icon-append fa fa-lock"></i>
+                            @Html.PasswordFor(m => m.Password)
+                            <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
+                        </label>
+                        <div class="note">
+                            <a href="forgotpassword.html">Forgot password?</a>
+                        </div>
+                    </section>
+
+                    <section>
+                        <label class="checkbox">
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            <i></i>Stay signed in
+                        </label>
+                    </section>
+                </fieldset>
+                <footer>
+                    <button type="submit" class="btn btn-primary">
+                        Sign in
+                    </button>
+                </footer>
+            }
+        </div>
+    </div>
+</div>
+
+			
+@section Scripts {
+    <script type="text/javascript">
+        runAllForms();
+
+        $(function () {
+            // Validation
+            $("#login-form").validate({
+                // Rules for form validation
+                rules: {
+                    email: {
+                        required: true,
+                        email: true
+                    },
+                    password: {
+                        required: true,
+                        minlength: 3,
+                        maxlength: 20
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    email: {
+                        required: 'Please enter your email address',
+                        email: 'Please enter a VALID email address'
+                    },
+                    password: {
+                        required: 'Please enter your password'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+        });
+    </script>
+}

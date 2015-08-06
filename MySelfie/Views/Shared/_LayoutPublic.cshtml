@@ -1,0 +1,42 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>MySelfie Admin</title>
+    @Styles.Render("~/Content/css-public")
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+</head>
+<body id="@ViewBag.BodyID" class="@ViewBag.BodyClass">
+    <!-- POSSIBLE CLASSES: minified, fixed-ribbon, fixed-header, fixed-width
+     You can also add different skin classes such as "smart-skin-1", "smart-skin-2" etc...-->
+
+    <header id="header">
+        @Html.Partial("_LogoPartial")
+        <span id="login-header-space"> 
+            <span class="hidden-mobile">Need an account?</span> 
+            @*<a href="register.html" class="btn btn-danger">Creat account</a>*@ 
+            @Html.ActionLink("Create account", "Register", "Account", null, new { @class="btn btn-danger" })
+        </span>
+    </header>
+    <div id="main" role="main">
+        <div id="content" class="container">
+            @RenderBody()
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/themejs-public")
+
+    <!--[if IE 7]>
+
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+    <![endif]-->
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

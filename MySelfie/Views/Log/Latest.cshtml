@@ -1,0 +1,97 @@
+﻿
+@model MySelfie.Models.LogListViewModel
+@{
+    Layout = null;
+}
+@if (Model.LogList != null)
+{
+    foreach (var log in Model.LogList)
+    {
+        <!-- Widget ID (each widget will need unique ID)-->
+    <div class="jarviswidget" id="wid-id-@(log.Id + log.Source)" data-widget-collapsed="true" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-fullscreenbutton="false" data-widget-custombutton="false" data-widget-sortable="false">
+        <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+        -->
+        <header class="log-header-@log.Type log-header" role="heading">
+            <div class="jarviswidget-ctrls" role="menu">     
+                <a href="javascript:void(0);" onclick="removeLog(@(log.Id), '@(log.Source)');" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <h2>
+                <strong>@log.Header</strong>
+                <i>@log.Type</i>
+            </h2>
+            @*<div class="widget-toolbar hidden-phone">
+    <div class="smart-form">
+            <label class="toggle">
+                <input type="checkbox" id="demo-switch-to-pills" name="checkbox-toggle">
+                <i data-swchon-text="TRUE" data-swchoff-text="FALSE"></i>Switch Navs / Pills
+            </label>
+        </div>
+            </div>*@
+        </header>
+
+        <!-- widget div-->
+        <div>
+
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+            </div>
+            <!-- end widget edit box -->
+            <!-- widget content -->
+            <div class="widget-body log-body">
+                <div>
+                    @if (log.Message != " ")
+                    {
+                        <h3>Message</h3>
+                        <p class="well bg-color-redLight text-color-white font-lg">
+                            @log.Message
+                        </p>   
+                    }                    
+                    @if (log.Context != " " && log.Context != null && log.Context != "no context")
+                    {
+                        <h3>Context</h3>
+                        <p class="well bg-color-teal text-color-white font-lg">
+                            @log.Context
+                        </p>
+                    }
+                    @if (log.UserName != " ")
+                    {
+                        <h3>UserName</h3>
+                        <p class="well bg-color-orange text-color-white font-lg">
+                            @log.UserName
+                        </p>
+                    }
+                    @if (log.TimeStamp != null)
+                    {
+                        <h3>Time</h3>
+                        <p class="well bg-color-pinkDark text-color-white font-lg">
+                            @log.TimeStamp
+                        </p>
+                    }
+                    
+                </div>
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget div -->
+    </div>
+    <!-- end widget -->   		
+    }
+}
+<script type="text/javascript">
+    LastWebLogID = @(Model.LastWebLogId);
+    LastWorkerLogID = @(Model.LastWorkerLogId);
+</script>

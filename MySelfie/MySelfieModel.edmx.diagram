@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="19539116009148e392b9bd1d802a2a4e" Name="Diagram1" ZoomLevel="114">
+        <EntityTypeShape EntityType="MySelfieModel.AspNetRole" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MySelfieModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="MySelfieModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MySelfieModel.AspNetUser" Width="1.5" PointX="3" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="MySelfieModel.Packet" Width="1.5" PointX="3" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="MySelfieModel.PhotoTweet" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="MySelfieModel.Wall" Width="1.5" PointX="0.75" PointY="7.375" IsExpanded="true" />
+        <AssociationConnector Association="MySelfieModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_User_Id" ManuallyRouted="false" />
+        <AssociationConnector Association="MySelfieModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="MySelfieModel.FK_Packet_Wall" ManuallyRouted="false" />
+        <AssociationConnector Association="MySelfieModel.FK_PhotoTweet_Packet" ManuallyRouted="false" />
+        <AssociationConnector Association="MySelfieModel.AspNetUserRoles" ManuallyRouted="false" />
+        <AssociationConnector Association="MySelfieModel.FK_PhotoTweet_WallId" />
+        <EntityTypeShape EntityType="MySelfieModel.WorkerCommand" Width="1.5" PointX="3" PointY="11.875" />
+        <AssociationConnector Association="MySelfieModel.FK_WorkerCommand_WallId" />
+        <AssociationConnector Association="MySelfieModel.FK_WorkerCommand_CreatedBy" />
+        <EntityTypeShape EntityType="MySelfieModel.WorkerStatus" Width="1.5" PointX="7.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MySelfieModel.Event" Width="1.5" PointX="7.375" PointY="3.75" />
+        <EntityTypeShape EntityType="MySelfieModel.TwitterAccount" Width="1.5" PointX="9.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MySelfieModel.Credential" Width="1.5" PointX="9.375" PointY="4.75" />
+        <EntityTypeShape EntityType="MySelfieModel.Photo" Width="1.5" PointX="5.25" PointY="12.875" />
+        <AssociationConnector Association="MySelfieModel.FK_Photo_Packet" />
+        <AssociationConnector Association="MySelfieModel.FK_Photo_WallId" />
+        <EntityTypeShape EntityType="MySelfieModel.WebLog" Width="1.5" PointX="7.375" PointY="8.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

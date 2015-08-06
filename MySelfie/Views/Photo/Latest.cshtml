@@ -1,0 +1,27 @@
+﻿@model MySelfie.Models.PhotoApprovalViewModel
+@{
+    Layout = null;
+}
+@if (Model.ImageList != null)
+{
+    foreach (var photo in Model.ImageList)
+    {
+        <div class="ballot" id="@photo.PhotoId">
+            <i class="fa fa-@(photo.Source.ToLower()) source-icon"></i>
+            <img class="selfie-image left-margin" src="@photo.FileName" alt="" />
+            <div class="photo-text left-margin">
+                <h4>@photo.UserScreenName</h4>
+                <div class="truncate">
+                    @photo.Text
+                </div>
+            </div>
+            <div class="voter left-margin">
+                <a onclick="approvePicture(@photo.PhotoId);" data-photoid="@photo.PhotoId" class="btn btn-default btn-circle btn-xl btn-success left-margin"><i class="glyphicon glyphicon-ok"></i></a>
+                <a onclick="declinePicture(@photo.PhotoId);" data-photoid="@photo.PhotoId" class="btn btn-default btn-circle btn-xl btn-danger left-margin"><i class="glyphicon glyphicon-remove"></i></a>
+            </div>
+        </div>
+    } 
+}
+<script type="text/javascript">
+    lastPhotoID = @(Model.LastPhotoTweetId);
+</script>

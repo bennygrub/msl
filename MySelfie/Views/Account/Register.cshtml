@@ -1,0 +1,169 @@
+﻿@model MySelfie.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutPublic.cshtml";
+}
+
+<div class="row">
+    @Html.Partial("_LeftContentPartial")
+    <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+        <div class="well no-padding">
+
+            @*<form action="php/demo-register.php" id="smart-form-register" class="smart-form client-form">*@
+            @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "smart-form client-form", role = "form", id="smart-form-register" }))
+            {
+                @Html.AntiForgeryToken()
+                <header>
+                    Create a new account.
+                </header>
+                @Html.ValidationSummary()
+
+                <fieldset>
+                    <section>
+                        <label class="input">
+                            <i class="icon-append fa fa-user"></i>
+                            @*<input type="text" name="username" placeholder="Username">*@
+                            @Html.TextBoxFor(m => m.UserName, new { placeholder="Username" })
+                            <b class="tooltip tooltip-bottom-right">Needed to enter the website</b>
+                        </label>
+                    </section>
+
+                    @*<section>
+                        <label class="input">
+                            <i class="icon-append fa fa-envelope"></i>
+                            <input type="email" name="email" placeholder="Email address">
+                            <b class="tooltip tooltip-bottom-right">Needed to verify your account</b>
+                        </label>
+                    </section>*@
+
+                    <section>
+                        <label class="input">
+                            <i class="icon-append fa fa-lock"></i>
+                            @*<input type="password" name="password" placeholder="Password" id="password">*@
+                            @Html.PasswordFor(m => m.Password, new { placeholder="Password" })
+                            <b class="tooltip tooltip-bottom-right">Don't forget your password</b>
+                        </label>
+                    </section>
+
+                    <section>
+                        <label class="input">
+                            <i class="icon-append fa fa-lock"></i>
+                            @*<input type="password" name="passwordConfirm" placeholder="Confirm password">*@
+                            @Html.PasswordFor(m => m.ConfirmPassword, new { placeholder="Confirm password" })
+                            <b class="tooltip tooltip-bottom-right">Don't forget your password</b>
+                        </label>
+                    </section>
+                </fieldset>
+
+                @*<fieldset>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="input">
+                                <input type="text" name="firstname" placeholder="First name">
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="input">
+                                <input type="text" name="lastname" placeholder="Last name">
+                            </label>
+                        </section>
+                    </div>
+
+                    <div class="row">
+                        <section class="col col-6">
+                            <label class="select">
+                                <select name="gender">
+                                    <option value="0" selected="" disabled="">Gender</option>
+                                    <option value="1">Male</option>
+                                    <option value="2">Female</option>
+                                    <option value="3">Prefer not to answer</option>
+                                </select> <i></i>
+                            </label>
+                        </section>
+                        <section class="col col-6">
+                            <label class="input">
+                                <i class="icon-append fa fa-calendar"></i>
+                                <input type="text" name="request" placeholder="Request activation on" class="datepicker" data-dateformat='dd/mm/yy'>
+                            </label>
+                        </section>
+                    </div>
+
+                    <section>
+                        <label class="checkbox">
+                            <input type="checkbox" name="subscription" id="subscription">
+                            <i></i>I want to receive news and special offers
+                        </label>
+                        <label class="checkbox">
+                            <input type="checkbox" name="terms" id="terms">
+                            <i></i>I agree with the <a href="#" data-toggle="modal" data-target="#myModal"> Terms and Conditions </a>
+                        </label>
+                    </section>
+                </fieldset>*@
+                <footer>
+                    <button type="submit" class="btn btn-primary">
+                        Register
+                    </button>
+                </footer>
+
+                <div class="message">
+                    <i class="fa fa-check"></i>
+                    <p>
+                        Thank you for your registration!
+                    </p>
+                </div>
+            }
+            @*</form>*@
+
+        </div>
+        @*<p class="note text-center">*FREE Registration ends on October 2015.</p>
+        <h5 class="text-center">- Or sign in using -</h5>
+        <ul class="list-inline text-center">
+            <li>
+                <a href="javascript:void(0);" class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="btn btn-info btn-circle"><i class="fa fa-twitter"></i></a>
+            </li>
+            <li>
+                <a href="javascript:void(0);" class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
+            </li>
+        </ul>*@
+    </div>
+</div>
+
+@*<h2>@ViewBag.Title.</h2>
+
+@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Create a new account.</h4>
+    <hr />
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.UserName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Register" />
+        </div>
+    </div>
+}*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

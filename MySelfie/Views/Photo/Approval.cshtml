@@ -1,0 +1,238 @@
+﻿@model MySelfie.Models.PhotoApprovalViewModel
+
+@{
+    ViewBag.Title = "Photo Approval";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2></h2>
+<p>
+    
+</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h1 class="page-title txt-color-blueDark">
+            <i class="fa fa-home fa-fw "></i>
+            @Html.RouteLink("Dashboard", "wall_index_g")
+            <span>
+                >
+                Photo Approval
+            </span>
+        </h1>
+    </div>
+</div>
+<!-- widget grid -->
+<section id="widget-grid" class="">
+
+    <!-- row -->
+    <div class="row">
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                <header>
+                    <span class="widget-icon">
+                        <i class="fa fa-magic"></i>
+                    </span>
+                    <h2>Photo Approval</h2>
+
+                </header>
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+
+                    <!-- widget content -->
+                    <div class="widget-body no-padding" id="photo_container">
+                        <div class="widget-body-toolbar">
+
+                        </div>
+
+                        @if (Model.ImageList != null)
+                        {
+                            foreach (var photo in Model.ImageList)
+                            {
+                                <div class="ballot" id="@photo.PhotoId">
+                                    <i class="fa fa-@(photo.Source.ToLower()) source-icon"></i>
+                                    <img class="selfie-image left-margin" src="@photo.FileName" alt="" />
+                                    <div class="photo-text left-margin">
+                                        <h4>@photo.UserScreenName</h4>
+                                        <div class="truncate">
+                                            @photo.Text
+                                        </div>
+                                    </div>
+                                    <div class="voter left-margin">
+                                        <a onclick="approvePicture(@photo.PhotoId);" data-photoid="@photo.PhotoId" class="btn btn-default btn-circle btn-xl btn-success left-margin"><i class="glyphicon glyphicon-ok"></i></a>
+                                        <a onclick="declinePicture(@photo.PhotoId);" data-photoid="@photo.PhotoId" class="btn btn-default btn-circle btn-xl btn-danger left-margin"><i class="glyphicon glyphicon-remove"></i></a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+        </article>
+        <!-- WIDGET END -->
+    </div>
+</section>
+
+<style>
+    .row {
+        margin: auto;
+    }
+
+    .ballot {
+        display: inline-block;
+        float: left;
+        width: 320px;
+        margin-bottom: 10px;
+        margin-left: 10px;
+        border: 1px solid #ffffff;
+        position: relative;
+    }
+
+        .ballot:hover {
+            border: 1px solid #659265;
+        }
+
+        .ballot i.source-icon {
+            position: absolute;
+            font-size: 45px;
+            top: 10px;
+            left: 2px;
+        }
+
+    .vote {
+        width: 100px;
+        height: 100px;
+    }
+
+    .photo-text {
+        height: 50px;
+    }
+
+    .voter {
+        margin-bottom: 10px;
+    }
+
+        .voter a {
+        }
+
+    .approval-image {
+        display: block;
+        width: 1000px;
+        margin: 30px;
+    }
+
+    img {
+        padding: 10px;
+    }
+
+    .selfie-image {
+        width: 250px;
+        height: 350px;
+        background-image: url("http://imageshack.us/a/img641/9127/borderbottomt.png"), url("http://imageshack.us/a/img825/9262/borderrighto.png");
+        background-position: center bottom, center right;
+        background-repeat: no-repeat;
+    }
+
+    .left-margin {
+        margin-left: 35px;
+    }
+
+    .truncate {
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>
+
+<script type="text/javascript">
+    var lastPhotoID = @(Model.LastPhotoTweetId);
+    var fetchLatestSpeedInSeconds = @(Model.FetchLatestSpeedInSeconds);
+    var fetchLatestAmount = @(Model.FetchLatestAmount);
+    var wallId = @(Model.WallId);
+
+    var approvalBuffer = 1000;
+    var isReadyToApprove = true;
+
+    function getMore() {
+        var model = {
+            LastPhotoTweetId: lastPhotoID,
+            FetchLatestSpeedInSeconds: fetchLatestSpeedInSeconds,
+            FetchLatestAmount: fetchLatestAmount,
+            WallId: wallId
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "/Photo/Latest",
+            data: model,
+            success: function(data) {
+                $("#photo_container").append(data);
+            }
+        });
+
+        timer = setTimeout(getMore, fetchLatestSpeedInSeconds * 1000);
+    }
+    var timer = setTimeout(getMore, fetchLatestSpeedInSeconds * 1000);
+
+    function approvePicture(id)
+    {
+        if (isReadyToApprove) {
+            isReadyToApprove = false;
+
+            var element = $('#' + id);
+
+            var model = {
+                PhotoTweetId: id,
+                Status: "approved",
+                Approved: true,
+                WallId: wallId
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "/Photo/Status",
+                data: model,
+                success: function (data) {
+                    if (data.success) {
+                        window.setTimeout(function() {
+                            element.hide();
+                            isReadyToApprove = true;
+                        }, approvalBuffer);                        
+                    }
+                }
+            });
+        }
+    }
+
+    function declinePicture(id) {
+        var element = $('#' + id);
+
+        var model = {
+            PhotoTweetId: id,
+            Status: "declined",
+            Approved: true,
+            WallId: wallId
+        }
+
+        $.ajax({
+            type: "POST",
+            url: "/Photo/Status",
+            data: model,
+            success: function (data) {
+                if (data.success) {
+                    element.hide();
+                }
+            }
+        });
+    }
+</script>

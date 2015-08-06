@@ -1,0 +1,173 @@
+﻿@model MySelfie.Models.LogListViewModel
+
+@{
+    ViewBag.Title = "System Log";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2></h2>
+<p>
+
+</p>
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h1 class="page-title txt-color-blueDark">
+            <i class="fa fa-home fa-fw "></i>
+            @Html.RouteLink("Dashboard", "wall_index_g")
+            <span>
+                >
+                System Log
+            </span>
+        </h1>
+    </div>
+</div>
+<!-- widget grid -->
+<section id="log-grid" class=" well well-lg">
+
+    <!-- row -->
+    <div class="row" id="log_container">
+        @if (Model.LogList != null)
+        {
+            foreach (var log in Model.LogList)
+            {
+
+                <!-- Widget ID (each widget will need unique ID)-->
+    <div class="jarviswidget" id="wid-id-@(log.Id + log.Source)" 
+         data-widget-collapsed="true" data-widget-colorbutton="false" 
+         data-widget-editbutton="false" data-widget-fullscreenbutton="false" 
+         data-widget-custombutton="false" data-widget-sortable="false">
+        <!-- widget options:
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
+
+        -->
+        <header class="log-header-@log.Type log-header" role="heading">
+            <div class="jarviswidget-ctrls" role="menu">
+                <a href="javascript:void(0);" onclick="removeLog(@(log.Id), '@(log.Source)');" class="button-icon jarviswidget-delete-btn" rel="tooltip" title="" data-placement="bottom" data-original-title="Delete">
+                    <i class="fa fa-times"></i>
+                </a>
+            </div>
+            <h2>
+                <strong>@log.Header</strong>
+                <i>@log.Type</i>
+            </h2>
+            @*<div class="widget-toolbar hidden-phone">
+    <div class="smart-form">
+        <label class="toggle">
+            <input type="checkbox" id="demo-switch-to-pills" name="checkbox-toggle">
+            <i data-swchon-text="TRUE" data-swchoff-text="FALSE"></i>Switch Navs / Pills
+        </label>
+    </div>
+            </div>*@
+        </header>
+
+        <!-- widget div-->
+        <div>
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                <!-- This area used as dropdown edit box -->
+            </div>
+            <!-- end widget edit box -->
+            <!-- widget content -->
+            <div class="widget-body log-body">
+                <div>
+                    @if (log.Message != " ")
+                    {
+                        <h3>Message</h3>
+                        <p class="well bg-color-redLight text-color-white font-lg">
+                            @log.Message
+                        </p>
+                    }
+                    @if (log.Context != " " && log.Context != "no context")
+                    {
+                        <h3>Context</h3>
+                        <p class="well bg-color-teal text-color-white font-lg">
+                            @log.Context
+                        </p>
+                    }
+                    @if (log.UserName != " ")
+                    {
+                        <h3>UserName</h3>
+                        <p class="well bg-color-orange text-color-white font-lg">
+                            @log.UserName
+                        </p>
+                    }
+                    @if (log.TimeStamp != null)
+                    {
+                        <h3>Time</h3>
+                        <p class="well bg-color-pinkDark text-color-white font-lg">
+                            @log.TimeStamp
+                        </p>
+                    }
+                </div>
+            </div>
+            <!-- end widget content -->
+        </div>
+        <!-- end widget div -->
+    </div>
+    <!-- end widget -->
+            }
+        }
+    </div>
+</section>
+
+
+
+<script type="text/javascript">
+    var fetchLatestSpeedInSeconds = @(Model.FetchSpeedInSeconds);
+    var fetchLatestAmount = @(Model.FetchAmount);
+    var LastWebLogID = @(Model.LastWebLogId);
+    var LastWorkerLogID = @(Model.LastWorkerLogId);
+    var Filter = "";
+
+    function getMore() {
+        var model = {
+            LastWebLogId: LastWebLogID,
+            LastWorkerLogId: LastWorkerLogID,
+            FetchSpeedInSeconds: fetchLatestSpeedInSeconds,
+            FetchAmount: fetchLatestAmount,
+            Filter: ""
+        };
+
+        $.ajax({
+            type: "GET",
+            url: "/Log/Latest",
+            data: model,
+            success: function(data) {
+                $("#log_container").prepend(data);
+            }
+        });
+
+        timer = setTimeout(getMore, fetchLatestSpeedInSeconds * 1000);
+    };
+    var timer = setTimeout(getMore, fetchLatestSpeedInSeconds * 1000);
+
+    function removeLog(id, source)
+    {
+        var model = {
+            id: id,
+            source: source
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Log/Remove",
+            data: model,
+            success: function(data) {
+                if (data.success) {
+                    $("#wid-id-" + data.id + data.source).remove();
+                } else {
+                    console.log(data.error);
+                }
+            }
+        });
+    };
+</script>

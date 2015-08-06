@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bc364c685d4a4285975bb1b546f0112c" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="MySelfieModel.PhotoTweet" Width="2.5" PointX="2.375" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MySelfieModel.Packet" Width="2.375" PointX="7.625" PointY="3.625" />
+        <AssociationConnector Association="MySelfieModel.FK_PhotoTweet_Packet" />
+        <EntityTypeShape EntityType="MySelfieModel.WorkerCommand" Width="1.5" PointX="7.625" PointY="8.25" />
+        <EntityTypeShape EntityType="MySelfieModel.AspNetUser" Width="1.5" PointX="0.75" PointY="6.875" />
+        <AssociationConnector Association="MySelfieModel.FK_WorkerCommand_CreatedBy" />
+        <EntityTypeShape EntityType="MySelfieModel.WorkerStatus" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="MySelfieModel.Credential" Width="1.5" PointX="0.75" PointY="10.75" />
+        <EntityTypeShape EntityType="MySelfieModel.TwitterAccount" Width="1.5" PointX="2.75" PointY="10.75" />
+        <EntityTypeShape EntityType="MySelfieModel.Wall" Width="1.5" PointX="5.5" PointY="11.375" />
+        <AssociationConnector Association="MySelfieModel.FK_Packet_Wall" />
+        <AssociationConnector Association="MySelfieModel.FK_PhotoTweet_WallId" />
+        <AssociationConnector Association="MySelfieModel.FK_WorkerCommand_WallId" />
+        <EntityTypeShape EntityType="MySelfieModel.Photo" Width="1.5" PointX="10.75" PointY="10" />
+        <AssociationConnector Association="MySelfieModel.FK_Photo_Packet" />
+        <AssociationConnector Association="MySelfieModel.FK_Photo_WallId" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

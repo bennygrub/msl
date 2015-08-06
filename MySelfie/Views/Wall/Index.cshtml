@@ -1,0 +1,119 @@
+﻿@model MySelfie.Models.WallListViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+	    <h1 class="page-title txt-color-blueDark">
+		    <i class="fa fa-table fa-fw "></i> 
+			    Wall 
+		    <span>
+                >
+			    Dashboard
+		    </span>
+	    </h1>
+    </div>
+
+@*    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+        @Html.Raw(@Html.ActionLink("[replace]", "Create", "Wall", null, new { title = "New Wall" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-plus-circle\"></i>"))            
+    </div>*@
+</div>
+<!-- widget grid -->
+<section id="widget-grid" class="">
+				
+	<!-- row -->
+	<div class="row">
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				
+	        <!-- Widget ID (each widget will need unique ID)-->
+	        <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+		        <header>
+			        <span class="widget-icon"> <i class="fa fa-home"></i> </span>
+			        <h2>Wall Management</h2>
+				
+		        </header>
+                <!-- widget div-->
+                <div>
+				
+	                <!-- widget edit box -->
+	                <div class="jarviswidget-editbox">
+		                <!-- This area used as dropdown edit box -->
+				
+	                </div>
+	                <!-- end widget edit box -->
+				
+	                <!-- widget content -->
+	                <div class="widget-body no-padding">
+		                <div class="widget-body-toolbar">
+				            @Html.Raw(@Html.ActionLink("[replace]", "Create", "Wall", null, new { title = "Create", @class = "btn btn-success" }).ToHtmlString().Replace("[replace]", "<i class=\"fa fa-lg fa-fw fa-plus-circle\"></i> Create New Wall"))
+		                </div>
+										
+		                @Html.Partial("_WallListPartial")				
+	                </div>
+	                <!-- end widget content -->				
+                </div>
+                <!-- end widget div -->
+            </div>
+	        <!-- end widget -->
+        </article>
+        <!-- WIDGET END -->
+    </div>
+</section>
+
+@section scripts {
+<script type="text/javascript">
+    $(document).ready(function () {
+        SetupTooltips();
+        SetupDeleteButton();        
+    });
+
+    function SetupTooltips() {
+        if ($("[rel=tooltip]").length) {
+            $("[rel=tooltip]").tooltip();
+        }
+    }
+
+    function SetupDeleteButton() {
+        $(".remove-wall-btn").click(function (e) {
+            var wallID = $(this).parent().parent().attr("data-wall-id");
+            var wallName = $(this).parent().parent().attr("data-wall-name");
+
+            var boxContent = "This will permanently remove the " +
+                                wallName + " wall.  Are you sure?" +
+                                "<p class='text-align-right'>" +
+                                "<a onclick='RemoveWall(" + wallID + ");' class='btn btn-primary btn-sm'>Yes</a>" +
+                                "<a href='javascript:void(0);' class='btn btn-danger btn-sm'>No</a></p>";
+
+            $.smallBox({
+                title: "Delete Wall?",
+                content: boxContent,
+                color: "#C46A69",
+                icon: "fa fa-times-circle swing animated"
+            });
+
+            e.preventDefault();
+        });
+    }
+
+    function RemoveWall(id) {
+        $.ajax({
+            type: "GET",
+            url: '@(Url.RouteUrl("wall_delete_g"))' + "/" + id,
+            success: function (data) {
+                $("#row_" + id).remove();
+            }
+        });
+    }
+
+    function SetupTable() {
+        $('#dt_wall').dataTable({
+            "sPaginationType": "bootstrap_full",
+            "ordering": true
+        });
+    }
+</script>
+}

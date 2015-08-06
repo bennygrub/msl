@@ -1,0 +1,541 @@
+﻿@model MySelfie.Models.WallModel
+
+@{
+    ViewBag.Title = "WallCreate";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .img-logo {
+        height: 200px;
+        margin: 10px;
+    }
+</style>
+<div class="row">
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+        <h1 class="page-title txt-color-blueDark">
+            <i class="fa fa-plus fa-fw "></i>
+            Wall
+            <span>
+                >
+                Edit
+            </span>
+        </h1>
+    </div>
+</div>
+<!-- widget grid -->
+<section id="widget-grid" class="">
+    <div class="row">
+
+        <!-- NEW COL START -->
+        <fieldset class="col-sm-12 col-md-12 col-lg-10">
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                    <h2>Edit Wall Details</h2>
+
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+                        @using (Html.BeginForm("Edit", "Wall", null, FormMethod.Post, new { @class = "smart-form", enctype = "multipart/form-data" } ))
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true)
+                            @Html.HiddenFor(model => model.WallId)
+                            @Html.HiddenFor(model => model.LogoPath)
+                            <header>
+                                Admin Settings
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-2">                     
+                                        @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "label" })                   
+                                        <label>
+                                            @Html.EditorFor(model => model.IsActive)                                            
+                                        </label>
+                                        <div class="txt-color-red">
+                                            @Html.ValidationMessageFor(model => model.IsActive)
+                                        </div>
+                                    </section>
+                                    <section class="col col-5">
+                                        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "label" })
+                                        <label class="input">
+                                            @Html.EditorFor(model => model.Name)
+                                        </label>
+                                        <div class="txt-color-red">
+                                            @Html.ValidationMessageFor(model => model.Name)
+                                        </div>
+                                    </section>
+                                    <section class="col col-5">
+                                        @Html.LabelFor(model => model.Hashtag, htmlAttributes: new { @class = "label" })
+                                        <label class="input">
+                                            @Html.EditorFor(model => model.Hashtag)
+                                        </label>
+                                        <div class="txt-color-red">
+                                            @Html.ValidationMessageFor(model => model.Hashtag)
+                                        </div>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <header>
+                                Wall Display Settings
+                            </header>
+                            <fieldset>                                
+                                <section>
+                                    @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Title)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Title)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.CaptionText, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.CaptionText)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.CaptionText)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.DescriptionText, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.DescriptionText)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.DescriptionText)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.RightText, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.RightText)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.RightText)
+                                    </div>
+                                </section>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        @Html.LabelFor(model => model.FrameTopColor, htmlAttributes: new { @class = "label" })
+                                        <label class="input">
+                                            @Html.EditorFor(model => model.FrameTopColor)
+                                        </label>
+                                        <div class="txt-color-red">
+                                            @Html.ValidationMessageFor(model => model.FrameTopColor)
+                                        </div>
+                                    </section>
+                                    <section class="col col-6">
+                                        @Html.LabelFor(model => model.FrameBottomColor, htmlAttributes: new { @class = "label" })
+                                        <label class="input">
+                                            @Html.EditorFor(model => model.FrameBottomColor)
+                                        </label>
+                                        <div class="txt-color-red">
+                                            @Html.ValidationMessageFor(model => model.FrameBottomColor)
+                                        </div>
+                                    </section>
+                                </div>
+                                <section>
+                                    @Html.LabelFor(model => model.LogoPath, htmlAttributes: new { @class = "label" })
+                                    <label class="input input-file">
+                                        <span class="button">                                            
+                                            <input type="file" id="LogoImageFile" name="LogoImageFile" onchange="this.parentNode.nextSibling.value = this.value">
+                                            Browse
+                                        </span>
+                                        <input type="text" placeholder="Include some files" readonly="">
+                                        @if (Model.LogoImage != null)
+                                        {
+                                            <img src="@(Url.RouteUrl("wall_image_g") + "/" + Model.WallId)" class="img-logo" />
+                                        }       
+                                    </label>
+                                                                 
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.LogoPath)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.RetweetMessage, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.RetweetMessage)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.RetweetMessage)
+                                    </div>
+                                </section>
+                            </fieldset>
+                            <header>
+                                Wall Animation Settings
+                            </header>
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-6">
+                                        @Html.LabelFor(model => model.PhotoShownLengthSecond, htmlAttributes: new { @class = "label" })
+                                        <label class="input">
+                                            @Html.EditorFor(model => model.PhotoShownLengthSecond)
+                                        </label>
+                                        <div class="txt-color-red">
+                                            @Html.ValidationMessageFor(model => model.PhotoShownLengthSecond)
+                                        </div>
+                                    </section>
+                                    <section class="col col-6">
+                                        @Html.LabelFor(model => model.AdShownLengthSecond, htmlAttributes: new { @class = "label" })
+                                        <label class="input">
+                                            @Html.EditorFor(model => model.AdShownLengthSecond)
+                                        </label>
+                                        <div class="txt-color-red">
+                                            @Html.ValidationMessageFor(model => model.AdShownLengthSecond)
+                                        </div>
+                                    </section>
+                                </div>
+                            </fieldset>
+                            <header>
+                                Twitter Posting API Credentials
+                            </header>
+                            <fieldset>
+                                <section>
+                                    @Html.LabelFor(model => model.TwitterUserName, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.TwitterUserName)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.TwitterUserName)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.TwitterAppName, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.TwitterAppName)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.TwitterAppName)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.ConsumerKey, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.ConsumerKey)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.ConsumerKey)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.ConsumerSecret, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.ConsumerSecret)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.ConsumerSecret)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.UserTokenKey, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.UserTokenKey)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.UserTokenKey)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.UserTokenSecret, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.UserTokenSecret)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.UserTokenSecret)
+                                    </div>
+                                </section>
+                            </fieldset>
+                            <header>
+                                Twitter Scraping API Credentials
+                            </header>
+                            <fieldset>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_TwitterUserName, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_TwitterUserName)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_TwitterUserName)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_TwitterAppName, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_TwitterAppName)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_TwitterAppName)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_ConsumerKey, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_ConsumerKey)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_ConsumerKey)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_ConsumerSecret, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_ConsumerSecret)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_ConsumerSecret)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_UserTokenKey, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_UserTokenKey)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_UserTokenKey)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_UserTokenSecret, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_UserTokenSecret)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_UserTokenSecret)
+                                    </div>
+                                </section>
+                            </fieldset>         
+                            <header>
+                                Instagram Posting API Credentials <a style="margin-left: 20px" class="k-button" id="testWindowButton">Test</a>
+                            </header>
+                            <fieldset>
+                                <section>
+                                    @Html.LabelFor(model => model.Post_InstagramUserName, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Post_InstagramUserName)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Post_InstagramUserName)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Post_InstagramPassword, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Post_InstagramPassword)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Post_InstagramPassword)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Post_InstagramClientID, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Post_InstagramClientID)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Post_InstagramClientID)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Post_InstagramClientSecret, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Post_InstagramClientSecret)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Post_InstagramClientSecret)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Post_InstagramToken, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Post_InstagramToken)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Post_InstagramToken)
+                                    </div>
+                                </section>
+                            </fieldset>
+                            
+                            <header>
+                                Instagram Scraping API Credentials
+                            </header>
+                            <fieldset>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_InstagramUserName, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_InstagramUserName)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_InstagramUserName)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_InstagramPassword, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_InstagramPassword)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_InstagramPassword)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_InstagramClientID, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_InstagramClientID)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_InstagramClientID)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_InstagramClientSecret, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_InstagramClientSecret)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_InstagramClientSecret)
+                                    </div>
+                                </section>
+                                <section>
+                                    @Html.LabelFor(model => model.Scrape_InstagramToken, htmlAttributes: new { @class = "label" })
+                                    <label class="input">
+                                        @Html.EditorFor(model => model.Scrape_InstagramToken)
+                                    </label>
+                                    <div class="txt-color-red">
+                                        @Html.ValidationMessageFor(model => model.Scrape_InstagramToken)
+                                    </div>
+                                </section>
+                            </fieldset>
+                            <fieldset>
+                                <footer>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fa fa-save"></i>
+                                        Save
+                                    </button>
+                                    <button type="button" class="btn btn-default" onclick="window.history.back();">
+                                        Back
+                                    </button>
+                                </footer>
+                            </fieldset>
+                        }
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+                <!-- end widget div -->
+
+            </div>
+            <!-- end widget -->
+        </fieldset>
+        <!-- END COL -->
+    </div>
+
+    <!-- END ROW -->
+</section>
+<!-- end widget grid -->
+
+<div id="windowContainer">
+<form>
+    <ul>
+        <!--
+        <li>
+            <label for="instagramUrl">Instagram URL: </label><input id="instagramUrl" class="instagramUrl" name="instagramUrl" />
+        </li>
+        -->
+        <li>
+        <label for="instagramUrl">Media ID: </label><input id="MediaId" class="MediaId" name="MediaId" />
+        </li>
+    <a style="margin-left: 20px" class="k-button" id="instagramTestButton">Test Instagram Comment</a>
+</form>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(document).ready(function () {
+            $("#FrameTopColor").colorpicker();
+            $("#FrameBottomColor").colorpicker();
+
+            var loadMediaID = function (url) {
+                $.ajax({
+                    url: "http://api.instagram.com/oembed?url=" + url
+                })
+                .done( function(data) {
+                    $("#MediaId").val(data.media_id);
+                })
+                .error( function() {
+                    alert("Error converting URL to media ID");
+                });
+            };
+
+            var kendoWindow = $("#windowContainer").kendoWindow({
+                title: "Test Instagram",
+                modal: true,
+                visible: false,
+                resizable: false,
+                width: 500,
+                close: function (e) {
+                },
+                open: function () {
+
+                }
+            }).data("kendoWindow");
+
+            $("#testWindowButton").click(function (e) {
+                e.preventDefault();
+                kendoWindow.center().open();
+            });
+
+            /*
+            var lastVal;
+            $("#instagramUrl").blur(function () {
+                var val = $(this).val();
+                if (val && val != lastVal) {
+                    loadMediaID(val);
+                }
+            });
+            */
+
+
+            $("#instagramTestButton").click(function (e) {
+                e.preventDefault();
+                var data = {
+                    RetweetMessage: $("#RetweetMessage").val(),
+                    MediaId: $("#MediaId").val(), //"938465188402119058_1545689559",
+                    Post_InstagramUserName: $("#Post_InstagramUserName").val(),
+                    Post_InstagramPassword: $("#Post_InstagramPassword").val(),
+                    Post_InstagramClientID: $("#Post_InstagramClientID").val(),
+                    Post_InstagramClientSecret: $("#Post_InstagramClientSecret").val(),
+                    Post_InstagramToken: $("#Post_InstagramToken").val()
+                };
+                for(var key in data) {
+                    if (!data[key]) {
+                        alert(key + " must have a value.");
+                        return;
+                    }
+                }
+
+                $.ajax({
+                    method: "POST",
+                    url: "/Wall/TestInstagramComment",
+                    data: data
+                }).done( function(data) {
+                    alert(data.response );
+                }).error(function (event, jqXHR, ajaxSettings, thrownError) {
+                    alert("Ajax error: " + thrownError );
+                });
+            });
+        });
+    </script>
+}

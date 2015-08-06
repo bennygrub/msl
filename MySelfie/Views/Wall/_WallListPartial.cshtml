@@ -1,0 +1,85 @@
+﻿@model MySelfie.Models.WallListViewModel
+	
+<table id="dt_wall" class="table table-striped table-bordered table-hover wall-table">
+	<thead>
+		<tr>
+			@*<th>Status</th>*@
+			<th>Active?</th>
+			@*<th>Scraping?</th>*@
+			<th>Hashtag</th>
+			<th>Name</th>
+            <th>Twitter Account</th>
+            <th>Scraper Account</th>
+            @*<th>Auth Instagram</th>*@
+            <th class="center">Edit</th>
+            <th class="center">Approve</th>
+            <th class="center">Comments</th>
+            <th class="center">View Wall</th>
+            <th class="center">Delete</th>
+		</tr>
+	</thead>
+	<tbody>
+@foreach (var item in Model.WallList) {
+        <tr id="row_@item.WallId" data-wall-id="@item.WallId" data-wall-name="@item.Name">
+            @*<td>
+                @item.Status
+            </td>*@
+            <td>
+                @if (item.IsActive)
+                {
+                    <span>Yes</span>
+                } else 
+                {
+                    <span>No</span>
+                }
+            </td>
+            @*<td>
+                @if (item.IsScraping)
+                {
+                    <span>Yes</span>
+                } else 
+                {
+                    <span>No</span>
+                }
+            </td>*@
+            <td>
+                @item.Hashtag
+            </td>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.TwitterUserName
+            </td>
+            <td>
+                @item.Scrape_TwitterUserName
+            </td>
+            @*<td>
+                @if (item.Instagram_Redirect_URL == null)
+                {
+                    <span class="btn btn-warning btn-icon" rel="tooltip" data-placement="bottom" data-original-title="Enter Instagram Client ID in Wall Edit"><i class="fa fa-instagram"></i> Sign In</span>
+                }
+                else
+                {
+                    <a href="@(item.Instagram_Redirect_URL)" class="btn btn-primary btn-icon" rel="tooltip" data-placement="bottom" data-original-title="Sign in to Instagram" target="_blank"><i class="fa fa-instagram"></i> Sign In</a>
+                }
+            </td>*@
+            <td class="center">
+                @Html.Raw(@Html.RouteLink("[replace]", "wall_edit_g", new { id = item.WallId }).ToHtmlString().Replace("[replace]", "<i class=\"btn view-wall-btn fa fa-lg fa-fw fa-wrench\" rel=\"tooltip\" data-placement=\"bottom\" data-original-title=\"Edit\"></i>"))
+            </td>
+            <td class="center">
+                @Html.Raw(@Html.RouteLink("[replace]", "photo_approval_g", new { id = item.WallId }).ToHtmlString().Replace("[replace]", "<i class=\"btn view-wall-btn fa fa-lg fa-fw fa-thumbs-o-up\" rel=\"tooltip\" data-placement=\"bottom\" data-original-title=\"Photo Approval (" + item.PendingApproval + ")\"></i>"))
+            </td>
+            <td class="center">
+                @Html.Raw(@Html.RouteLink("[replace]", "photo_approval_comment", new { id = item.WallId }).ToHtmlString().Replace("[replace]", "<i class=\"btn view-wall-btn fa fa-lg fa-fw fa-thumbs-o-up\" rel=\"tooltip\" data-placement=\"bottom\" data-original-title=\"Photo Approval (" + item.PendingApproval + ")\"></i>"))
+            </td>
+            <td class="center">
+                @Html.Raw(@Html.RouteLink("[replace]", "photo_viewer_g", new { id = item.WallId }, new { target = "_blank" }).ToHtmlString().Replace("[replace]", "<i class=\"btn view-wall-btn fa fa-lg fa-fw fa-eye\" rel=\"tooltip\" data-placement=\"bottom\" data-original-title=\"View Wall\"></i>"))
+            </td>
+            <td class="center">
+                <i class="btn remove-wall-btn fa fa-lg fa-fw fa-times-circle" rel="tooltip" data-placement="bottom" data-original-title="Remove Wall"></i>
+            </td>
+        </tr>
+}												
+	</tbody>
+</table>				
